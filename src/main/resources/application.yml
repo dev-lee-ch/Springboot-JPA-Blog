@@ -1,6 +1,36 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /blog
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    
 spring:
+  mvc:
+    view:
+     prefix: /WEB-INF/views/
+     suffix: .jsp
+      
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
     username: devUser
     password: devUser
+    
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update  # 테이블 생성 옵션 (실행시마다 생성, 업데이트, none) 
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # 카멜케이스 그대로 테이블, 필드 생성
+        #physical-strategy: org.hibernate.boot.model.naming.SpringPhysicalNamingStrategy # 카멜케이스를 언더바로 구분하여 테이블, 필드 생성 
+      use-new-id-generator-mappings: false  # false로 설정 시 DB 넘버링 전략을 사용
+    show-sql: true  # 실행 쿼리 로그
+    properties:
+      hibernate.format_sql: true  # 실행 쿼리 로그 정렬
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
