@@ -112,7 +112,7 @@ public class DummyControllerTest {
 		return user;
 	}
 	
-	
+	/* DELETE */
 	@DeleteMapping("/dummy/user/{id}")
 	public String deletUser(@PathVariable int id) {
 		try {
