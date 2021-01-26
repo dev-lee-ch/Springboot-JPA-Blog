@@ -4,9 +4,9 @@ let index = {
 			this.save();
 		});
 		
-		$("#btn-login").on("click", () => { // function() {} X -() -> {} 이유는 this를 바인딩하기위해서!!
-			this.login();
-		});
+//		$("#btn-login").on("click", () => { // function() {} X -() -> {} 이유는 this를 바인딩하기위해서!!
+//			this.login();
+//		});
 	},
 	
 	save: function() {
@@ -22,7 +22,7 @@ let index = {
 		$.ajax({
 			// 회원가입 수행 요청
 			type: "POST",
-			url: "/blog/api/user",
+			url: "/auth/joinProc",
 			data: JSON.stringify(data),	// http body 데이터
 			contentType: "application/json;charset=utf-8",	//body 데이터가 어떤 타입인지 (MIME)
 			dataType: "json" //응답데이터가 어떤 타입인지
@@ -30,13 +30,13 @@ let index = {
 			// 정상
 			alert("회원가입이 완료되었습니다.");
 			console.log('resp : ', resp);
-			location.href="/blog"
+			location.href="/"
 		}).fail(function(error) {
 			// 실패
 			alert(JSON.stringify(error));
 		});
 	},
-	
+	/*
 	login: function() {
 		//alert('user의 save함수 호출됨');
 		let data = {
@@ -49,7 +49,7 @@ let index = {
 		$.ajax({
 			// 회원가입 수행 요청
 			type: "POST",
-			url: "/blog/api/user/login",
+			url: "/api/user/login",
 			data: JSON.stringify(data),	// http body 데이터
 			contentType: "application/json;charset=utf-8",	//body 데이터가 어떤 타입인지 (MIME)
 			dataType: "json" //응답데이터가 어떤 타입인지
@@ -57,12 +57,13 @@ let index = {
 			// 정상
 			alert("로그인이 완료되었습니다.");
 			console.log('resp : ', resp);
-			location.href="/blog"
+			location.href="/"
 		}).fail(function(error) {
 			// 실패
 			alert(JSON.stringify(error));
 		});
 	}
+	*/
     
 }
 
