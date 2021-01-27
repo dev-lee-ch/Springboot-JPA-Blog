@@ -39,7 +39,6 @@ public class Board {
 	@Lob // 대용량 데이터 타입
 	private String content; // 섬머노트 라이브러리 사용 -> html 태그가 저장됨
 	
-	@ColumnDefault("0")
 	private int count;
 	
 	@ManyToOne(fetch = FetchType.EAGER)	// Many = Board, User = One => 한명의 사용자가 여러개의 게시글을 쓸 수 있다.
