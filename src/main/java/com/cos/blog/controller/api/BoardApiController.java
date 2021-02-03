@@ -6,6 +6,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +31,16 @@ public class BoardApiController {
 	
 	@DeleteMapping("/api/board/{id}")
 	public ResponseDto<Integer> deleteById(@PathVariable int id, @AuthenticationPrincipal PrincipalDetail principal) {
-		System.out.println("Board Api Controller : save 호출됨");
+		System.out.println("Board Api Controller : delete 호출됨");
 		boardService.deleteById(id);
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1) ;
+	}
+	
+	@PutMapping("/api/board/{id}")
+	public ResponseDto<Integer> updateById(@PathVariable int id, @AuthenticationPrincipal PrincipalDetail principal, @RequestBody Board board) {
+		System.out.println("Board Api Controller : update 호출됨");
+		boardService.updateById(id, board);
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1) ;
 	}
