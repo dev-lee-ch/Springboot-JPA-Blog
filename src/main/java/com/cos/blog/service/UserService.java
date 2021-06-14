@@ -34,6 +34,21 @@ public class UserService {
 		return 1;
 	}
 
+	@Transactional
+	public void updateUser(User requestUser) {
+		User user = userRepository.findById(requestUser.getId())
+			.orElseThrow(()->{
+				return new IllegalArgumentException("글 상세보기 실패: 아이디를 찾을 수 없습니다.");
+			}); // 영속화 완료
+		
+		String rawPassword = requestUser.getPassword();
+		String encPassword = encode.encode(rawPassword);
+		
+		user.setPassword(encPassword);
+		user.setEmail(requestUser.getEmail());
+		
+	}
+
 //	기존 세션 로그인 방식
 //	@Transactional(readOnly = true)	// Select 할 때 트랜젝션 시작, 서비스 종료 시에 트랜젝션 종료 (정합성 유지)
 //	public User login(User user) {

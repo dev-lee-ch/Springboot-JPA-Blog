@@ -3,6 +3,7 @@ package com.cos.blog.controller.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,14 @@ public class UserApiController {
 		System.out.println("User Api Controller : save 호출됨");
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), userService.save(user)) ;
+	}
+	
+	@PutMapping("/user")
+	public ResponseDto<Integer> update(@RequestBody User user) {
+		userService.updateUser(user);
+		// DB 처리는 완료되었지만,
+		// 세션 업데이트 처리는 되어있지 않음 -> 직접 세션값을 변경해줘야함.
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
 //	//	기존 세션 로그인 방식
